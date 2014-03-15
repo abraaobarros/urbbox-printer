@@ -14,7 +14,7 @@
 # http://www.adafruit.com/products/600 Printer starter pack
 
 from __future__ import print_function
-import urllib, time
+import urllib, time,json, urllib2
 from Adafruit_Thermal import *
 from xml.dom.minidom import parseString
 
@@ -23,7 +23,8 @@ from xml.dom.minidom import parseString
 # by 'manually' visiting http://weather.yahoo.com, entering a location
 # and requesting a forecast, then copy the number from the end of the
 # current URL string and paste it here.
-WOEID = '2459115'
+username = 'demo'
+password = '123456'
 
 # Dumps one forecast line to the printer
 def forecast(idx):
@@ -42,13 +43,38 @@ printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
 deg     = chr(0xf8) # Degree symbol on thermal printer
 
 # Fetch forecast data from Yahoo!, parse resulting XML
-dom = parseString(urllib.urlopen(
-        'http://weather.yahooapis.com/forecastrss?w=' + WOEID).read())
+# dom = parseString(urllib.urlopen(
+#         'www.urbbox.com.br' + WOEID).read())
+
+# make request
+headers = {
+    'Host': 'urbbox.com.br',
+    'Connection': 'keep-alive',
+    'Origin': 'http://www.urbbox.com.br',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1',
+    'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    'Accept': 'text/javascript, text/html, application/xml, text/xml, */*',
+    'Referer': 'http://www.urbbox.com.br/admin',
+    'Accept-Encoding': 'gzip,deflate,sdch',
+    'Accept-Language': 'en-US,en;q=0.8',
+    'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+    'Cookie': 'PHPSESSID=lvetilatpgs9okgrntk1nvn595'
+}
+
+data = {
+    'username': 'demo',
+	'password': '123456'
+}
+
+data = urllib.urlencode(data)
+req = urllib2.Request('https://www.urbbox.com.br/admin', data, headers) 
+response = urllib2.urlopen(req)
+
+
 
 # Print heading
 printer.inverseOn()
-printer.print('{:^32}'.format(
-  dom.getElementsByTagName('description')[0].firstChild.data))
+printer.print('{:^32}'.format(response))
 printer.inverseOff()
 
 # Print current conditions
