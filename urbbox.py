@@ -63,6 +63,7 @@ def check_novos_pedidos():
 	print "checkando pedidos"
 	try:
 		r2 = s.get("http://2.preguicosotest.appspot.com/pedidos/1323001")
+		global n_pedido
 		qtd = r2.text
 		if n_pedido is not qtd:
 			print_list_orders()
