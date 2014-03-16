@@ -72,6 +72,7 @@ def tap():
 def hold():
 	printer.println("Segurei")
 
+check_novos_pedidos()
 
 # Poll initial button state and time
 prevButtonState = GPIO.input(buttonPin)
@@ -113,7 +114,6 @@ while(True):
 
   if t > nextInterval:
     nextInterval = t + 5.0
-    check_novos_pedidos()
     if result is not None:
       lastId = result.rstrip('\r\n')
 
