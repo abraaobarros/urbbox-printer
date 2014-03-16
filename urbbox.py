@@ -1,7 +1,7 @@
 from Adafruit_Thermal import *
 import json
 
-import requests
+
 import subprocess, time, Image, socket
 import RPi.GPIO as GPIO
 
@@ -60,6 +60,7 @@ def print_list_orders():
 n_pedido = 0
 qtd = 0
 def check_novos_pedidos():
+	print "checkando pedidos"
 	r2 = s.get("http://2.preguicosotest.appspot.com/pedidos/1323001")
 	print r2.text
 	qtd = json.loads(r2.text)['qtd']
@@ -70,6 +71,7 @@ def check_novos_pedidos():
 
 def tap():
 	printer.println("Apertei")
+	subprocess.call('check_novos_pedidos')
 def hold():
 	printer.println("Segurei")
 
@@ -115,5 +117,4 @@ while(True):
 
   if t > nextInterval:
     nextInterval = t + 5.0
-    tap()
 
