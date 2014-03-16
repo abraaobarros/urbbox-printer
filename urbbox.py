@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 
 ledPin       = 18
 buttonPin    = 23
-holdTime     = 2     # Duration for button hold (shutdown)
+holdTime     = 4     # Duration for button hold (shutdown)
 tapTime      = 0.01  # Debounce time for button taps
 nextInterval = 0.0   # Time of next recurring operation
 dailyFlag    = False # Set after daily trigger occurs
@@ -107,7 +107,12 @@ while(True):
  
   if ((int(t) & 1) == 0) and ((t - int(t)) < 0.15):
     GPIO.output(ledPin, GPIO.HIGH)
-    check_novos_pedidos()
   else:
     GPIO.output(ledPin, GPIO.LOW)
+
+  if t > nextInterval:
+    nextInterval = t + 5.0
+    check_novos_pedidos()
+    if result is not None:
+      lastId = result.rstrip('\r\n')
 
