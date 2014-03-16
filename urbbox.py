@@ -58,14 +58,13 @@ def print_list_orders():
 	printer.feed(4)
 	GPIO.output(ledPin, GPIO.LOW)
 
-n_pedido = 0
+n_pedido = ""
 def check_novos_pedidos():
 	print "checkando pedidos"
 	try:
 		r2 = s.get("http://2.preguicosotest.appspot.com/pedidos/1323001")
-		print r2.json
-		qtd = int(json.loads(r2.text)['qtd'])
-		if n_pedido != qtd:
+		qtd = r2.text
+		if n_pedido is not qtd:
 			print_list_orders()
 			n_pedido=qtd
 	except Exception, e:
