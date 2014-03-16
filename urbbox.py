@@ -2,7 +2,7 @@ from Adafruit_Thermal import *
 import json
 
 import requests
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 ledPin       = 18
 buttonPin    = 23
