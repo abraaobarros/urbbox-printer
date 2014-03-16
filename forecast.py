@@ -77,22 +77,22 @@ printer.inverseOn()
 printer.print('{:^32}'.format("Abraao e muito foda"))
 printer.inverseOff()
 
-# Print current conditions
-printer.boldOn()
-printer.print('{:^32}'.format('Current conditions:'))
-printer.boldOff()
-printer.print('{:^32}'.format(
-  dom.getElementsByTagName('pubDate')[0].firstChild.data))
-temp = dom.getElementsByTagName('yweather:condition')[0].getAttribute('temp')
-cond = dom.getElementsByTagName('yweather:condition')[0].getAttribute('text')
-printer.print(temp)
-printer.print(deg)
-printer.println(' ' + cond)
-printer.boldOn()
+# # Print current conditions
+# printer.boldOn()
+# printer.print('{:^32}'.format('Current conditions:'))
+# printer.boldOff()
+# printer.print('{:^32}'.format(
+#   dom.getElementsByTagName('pubDate')[0].firstChild.data))
+# temp = dom.getElementsByTagName('yweather:condition')[0].getAttribute('temp')
+# cond = dom.getElementsByTagName('yweather:condition')[0].getAttribute('text')
+# printer.print(temp)
+# printer.print(deg)
+# printer.println(' ' + cond)
+# printer.boldOn()
 
-# Print forecast
-printer.print('{:^32}'.format('Forecast:'))
-printer.boldOff()
+# # Print forecast
+# printer.print('{:^32}'.format('Forecast:'))
+# printer.boldOff()
 forecast(0)
 forecast(1)
 
