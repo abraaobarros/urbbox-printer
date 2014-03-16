@@ -7,6 +7,11 @@ import RPi.GPIO as GPIO
 
 ledPin       = 18
 buttonPin    = 23
+holdTime     = 2     # Duration for button hold (shutdown)
+tapTime      = 0.01  # Debounce time for button taps
+nextInterval = 0.0   # Time of next recurring operation
+dailyFlag    = False # Set after daily trigger occurs
+
 
 GPIO.setmode(GPIO.BCM)
 
@@ -52,6 +57,12 @@ def tap():
 def hold():
 	printer.println("Segurei")
 	print_list_orders()
+
+# Poll initial button state and time
+prevButtonState = GPIO.input(buttonPin)
+prevTime        = time.time()
+tapEnable       = False
+holdEnable      = False
 
 while(True):
 	# Poll current button state and time
