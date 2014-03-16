@@ -65,6 +65,8 @@ def daily():
   GPIO.output(ledPin, GPIO.LOW)
 
 
+
+
 # Initialization
 
 # Use Broadcom pin numbers (not Raspberry Pi pin numbers) for GPIO
