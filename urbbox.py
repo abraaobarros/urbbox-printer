@@ -120,6 +120,6 @@ while(True):
 
   if t > nextInterval:
     nextInterval = t + 5.0
-    th = Thread(target=check_novos_pedidos,args=(t,))
+    th = Thread(target=check_novos_pedidos,args=(int(t),))
     t.start()
 
