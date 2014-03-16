@@ -7,6 +7,16 @@ import RPi.GPIO as GPIO
 ledPin       = 18
 buttonPin    = 23
 
+GPIO.setmode(GPIO.BCM)
+
+# Enable LED and button (w/pull-up on latter)
+GPIO.setup(ledPin, GPIO.OUT)
+GPIO.setup(buttonPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+# LED on while working
+GPIO.output(ledPin, GPIO.HIGH)
+time.sleep(30)
+
 printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
 GPIO.output(ledPin, GPIO.HIGH)
 
