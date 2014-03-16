@@ -58,6 +58,7 @@ def print_list_orders():
 	GPIO.output(ledPin, GPIO.LOW)
 
 n_pedido = 0
+qtd = 0
 def check_novos_pedidos():
 	r2 = s.get("http://2.preguicosotest.appspot.com/pedidos/1323001")
 	print r2.text
