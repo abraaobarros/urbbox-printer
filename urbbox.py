@@ -1,7 +1,7 @@
 from Adafruit_Thermal import *
 import json
 
-
+import requests
 import subprocess, time, Image, socket
 import RPi.GPIO as GPIO
 
