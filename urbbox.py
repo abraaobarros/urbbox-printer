@@ -114,6 +114,5 @@ while(True):
 
   if t > nextInterval:
     nextInterval = t + 5.0
-    if result is not None:
-      lastId = result.rstrip('\r\n')
+    tap()
 
