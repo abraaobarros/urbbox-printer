@@ -2,8 +2,9 @@ from Adafruit_Thermal import *
 import json
 
 import requests
-import subprocess, time, Image, socket
+import time, Image, socket
 import RPi.GPIO as GPIO
+from threading import Thread
 
 ledPin       = 18
 buttonPin    = 23
@@ -58,7 +59,6 @@ def print_list_orders():
 	GPIO.output(ledPin, GPIO.LOW)
 
 n_pedido = 0
-qtd = 0
 def check_novos_pedidos():
 	print "checkando pedidos"
 	try:
@@ -74,11 +74,11 @@ def check_novos_pedidos():
 
 def tap():
 	printer.println("Apertei")
-	subprocess.call('check_novos_pedidos')
+
 def hold():
 	printer.println("Segurei")
 
-check_novos_pedidos()
+# check_novos_pedidos()
 
 # Poll initial button state and time
 prevButtonState = GPIO.input(buttonPin)
@@ -120,4 +120,6 @@ while(True):
 
   if t > nextInterval:
     nextInterval = t + 5.0
+    th = Thread(target=check_novos_pedidos,args=(t,))
+    t.start()
 
