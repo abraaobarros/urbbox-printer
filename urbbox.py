@@ -60,10 +60,11 @@ def print_list_orders():
 n_pedido = 0
 def check_novos_pedidos():
 	r2 = s.get("http://2.preguicosotest.appspot.com/pedidos/1323001")
-	qtd = json.loads(r2.text)['qtd']
-	if n_pedido != qtd:
-		print_list_orders()
-		n_pedido=qtd
+	print r2.text
+	# qtd = json.loads(r2.text)['qtd']
+	# if n_pedido != qtd:
+	# 	print_list_orders()
+	# 	n_pedido=qtd
 
 
 def tap():
